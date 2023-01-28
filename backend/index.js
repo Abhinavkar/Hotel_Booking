@@ -2,6 +2,9 @@ import  express  from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js"
+import roomsRoutes  from  "./routes/rooms.js"
+import hotelsRoutes  from "./routes/hotels.js"
+import usersRoutes from  "./routes/users.js"
 
 
 
@@ -27,7 +30,11 @@ const connect = async()=>{
 };
 
 //middle ware 	
-app.use("/auth",authRoutes);
+app.use("/api/auth",authRoutes);
+app.use("/api/rooms",roomsRoutes);
+app.use("/api/hotels",hotelsRoutes);
+app.use("/api/users",usersRoutes);
+
 
 
 app.listen(8000,()=>{
