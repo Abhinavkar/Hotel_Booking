@@ -29,7 +29,9 @@ const connect = async()=>{
 	})
 };
 
-//middle ware 	
+//middle ware 
+
+app.use (express.json);
 app.use("/api/auth",authRoutes);
 app.use("/api/rooms",roomsRoutes);
 app.use("/api/hotels",hotelsRoutes);
