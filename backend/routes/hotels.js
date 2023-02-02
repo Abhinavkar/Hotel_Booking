@@ -3,13 +3,6 @@ import Hotel from "../models/Hotels.js";
 import { createError } from "../utils/error.js";
 const router  = express.Router();
 router.post("/",async(req,res)=>{
-	const newHotel = new Hotel(req.body)
-	try{
-		const savedHotel = await newHotel.save()
-		res.status(200).json(savedHotel)
-	}
-	catch(err){
-		res.status(500).json(err)}
 	
 });
 
