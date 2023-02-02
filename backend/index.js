@@ -40,6 +40,20 @@ app.use("/api/rooms",roomsRoutes);
 app.use("/api/hotels",hotelsRoutes);
 app.use("/api/users",usersRoutes);
 
+app.use((err,req,res,next)=>{
+	const errorstatus = err.status || 500 
+	const errormessage = err.message|| "Something Went wrong !" 
+
+	return res.status(errorstatus).json({
+		success:false,
+		status : errorstatus,
+		message: errormessage,
+		stack:err.stack,
+
+	});
+
+});
+
 
 
 app.listen(8800,()=>{
