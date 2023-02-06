@@ -1,61 +1,51 @@
 import express from "express"
 import Hotel from "../models/Hotels.js";
+import { createError } from "../utils/error.js";
 const router  = express.Router();
 router.post("/",async(req,res)=>{
-	const newHotel = new Hotel(req.body)
-	try{
-		const savedHotel = await newHotel.save()
-		res.status(200).json(savedHotel)
-	}
-	catch(err){
-		res.status(500).json(err)}
 	
 });
 
-//Update
-router.put("/:id",async(req,res)=>{
+router.put("/:id", async (req,res) => {
 	
 	try{
-		//const updatedHotel = await Hotel.findByIdAndUpdate(req.params.id,{$set:} )
-		res.status(200).json(savedHotel)
+		const updatedHotel = await Hotel.findByIdAndUpdate( req.params.id ,{$set : req.body},{new:true})
+		res.status(200).json(updatedHotel);
 	}
 	catch(err){
-		res.status(500).json(err)}
+		res.status(500).json(err);}
 	
-});
-
-//delet
-router.post("/",async(req,res)=>{
-	const newHotel = new Hotel(req.body)
+}); 
+router.delete("/:id", async (req,res) => {
+	
 	try{
-		const savedHotel = await newHotel.save()
-		res.status(200).json(savedHotel)
+		await Hotel.findByIdAndUpdate( req.params.id );
+		res.status(200).json("Deleted Hotel");
 	}
 	catch(err){
-		res.status(500).json(err)}
+		res.status(500).json(err);}
 	
-});
-
-// get 
-router.post("/",async(req,res)=>{
-	const newHotel = new Hotel(req.body)
+}); 
+router.get("/:id", async (req,res) => {
+	
 	try{
-		const savedHotel = await newHotel.save()
-		res.status(200).json(savedHotel)
+		const hotel= await Hotel.findById( req.params.id );
+		res.status(200).json(hotel);
 	}
 	catch(err){
-		res.status(500).json(err)}
+		res.status(500).json(err);}
 	
-});
-//getall 
-router.post("/",async(req,res)=>{
-	const newHotel = new Hotel(req.body)
+}); 
+router.get("/", async (req,res,next) => {
+	//const failed = true
+	// if(failed) return next(createError(401,"You are not authenticated"))
+	 
 	try{
-		const savedHotel = await newHotel.save()
-		res.status(200).json(savedHotel)
+		const hotels= await Hotel.find();
+		res.status(200).json(hotels);
 	}
 	catch(err){
-		res.status(500).json(err)}
+		next(err)}
 	
-});
+}); 
 export default router ;
