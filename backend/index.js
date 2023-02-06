@@ -9,15 +9,14 @@ import usersRoutes from  "./routes/users.js"
 
 
 
-const app =express()
+const app =express();
 dotenv.config();
 
 const connect = async()=>{
 	try 
 	{
-		await mongoose.connect(process.env.DbUrl);
-		console.log("Connected to Database")
-	} 
+		 await mongoose.connect(process.env.DbUrl ,{useNewUrlParser:true,useUnifiedTopology:true},()=>{ console.log('connected to database');}
+	)} 
 	catch (error) 
 	{
 		throw error ;
@@ -36,7 +35,7 @@ const connect = async()=>{
 
 //middle ware 
 
-app.use (express.json);
+app.use (express.json());
 app.use("/api/auth",authRoutes);
 app.use("/api/rooms",roomsRoutes);
 app.use("/api/hotels",hotelsRoutes);
