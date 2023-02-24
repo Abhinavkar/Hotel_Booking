@@ -12,7 +12,7 @@ export const createHotel = async(res,req,next)=>{
 
 }
 
-export const updateHotel = async(res,req,next)=>{
+export const updateHotel = async(req,res,next)=>{
 	
 	try{
 		const savedHotel = await newHotel.save()
@@ -24,7 +24,7 @@ export const updateHotel = async(res,req,next)=>{
 	
 
 }
-export const deleteHotel = async(res,req,next)=>{
+export const deleteHotel = async(req,res,next)=>{
 	
 	try{
 		await Hotel.findByIdAndUpdate( req.params.id );
@@ -36,7 +36,7 @@ export const deleteHotel = async(res,req,next)=>{
 	
 
 }
-export const getHotel = async(res,req,next)=>{
+export const getHotel = async(req ,res,next)=>{
 	
 	try{
 		const hotel= await Hotel.findById( req.params.id );
@@ -48,7 +48,7 @@ export const getHotel = async(res,req,next)=>{
 	
 
 }
-export const getHotels = async(res,req,next)=>{
+export const getHotels = async(req,res,next)=>{
 	
 	try{
 		const hotels= await Hotel.find();
@@ -57,6 +57,4 @@ export const getHotels = async(res,req,next)=>{
 	catch(err){
 		next(err);
 	}
-	
-
-}
+};
